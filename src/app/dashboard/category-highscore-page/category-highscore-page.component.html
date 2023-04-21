@@ -1,0 +1,64 @@
+<script src="https://kit.fontawesome.com/c98497f7ae.js" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div class="highscore-container">
+        <h3 class="text-center">Highscore List</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Place</th>
+                    <th>Name</th>
+                    <th>Weighted Points</th>
+                    <th>Score</th>
+                    <th>Time</th>
+                    <th>Start Game</th>
+                    <th>End Game</th>
+                    <th>Duration Quiz</th>
+                    <th>Choosen Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add your highscore rows here -->
+                <tr *ngFor="let score of highscore; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td *ngIf="!score.editing">{{ score.spieler }}</td>
+                    <td *ngIf="score.editing"><input [(ngModel)]="score.spieler" placeholder="Name" class="new-input"></td>
+                    <td>{{ weightedPoints(score) }}</td>
+                    <td *ngIf="!score.editing">{{ score.punktzahl }}</td>
+                    <td *ngIf="score.editing"><input [(ngModel)]="score.punktzahl" placeholder="Score" class="new-input"></td>
+                    <td>{{ score.start | date:'short' }}</td>
+                    <td *ngIf="!score.editing">{{ score.start | date:'short' }}</td>
+                    <td *ngIf="score.editing"><input [(ngModel)]="score.start" placeholder="Start Game" class="new-input"></td>
+                    <td *ngIf="!score.editing">{{ score.ende | date:'short' }}</td>
+                    <td *ngIf="score.editing"><input [(ngModel)]="score.ende" placeholder="End Game" class="new-input"></td>
+                    <td>{{ durationQuiz(score) }}</td>
+                    <td *ngIf="!score.editing">{{ score.kategorien_id }}</td>
+                    <td *ngIf="score.editing"><input [(ngModel)]="score.kategorien_id" placeholder="Choosen Category" class="new-input"></td>
+                    <td>
+                        <button *ngIf="!newRow.editing" type="button" class="btn btn-success action-btn" (click)="editScore(score)"><i class="fas fa-edit"></i></button>
+                        <button *ngIf="score.editing" type="button" class="btn btn-success action-btn" (click)="updateScore(score)"><i class="fas fa-save"></i></button>
+                        <button *ngIf="!newRow.editing" type="button" class="btn btn-danger action-btn" (click)="deleteScore(score)"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                <tr *ngIf="newRow.editing">
+                    <td>#</td>
+                    <td><input [(ngModel)]="newRow.spieler" placeholder="Name" class="new-input"></td>
+                    <td>{{weightedPoints(newRow)}}</td>
+                    <td><input [(ngModel)]="newRow.punktzahl" placeholder="Score" class="new-input"></td>
+                    <td>{{ newRow.start | date:'short' }}</td>
+                    <td><input [(ngModel)]="newRow.start" placeholder="Start Game" class="new-input"></td>
+                    <td><input [(ngModel)]="newRow.ende" placeholder="End Game" class="new-input"></td>
+                    <td>{{durationQuiz(newRow)}}</td>
+                    <td><input [(ngModel)]="newRow.kategorien_id" placeholder="Choosen Category" class="new-input"></td>
+                    <td>
+                        <button type="button" class="btn btn-success action-btn" (click)="submitNewScore(newRow)"><i class="fas fa-check"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button class="btn btn-primary add-new" (click)="addNewRow()">Add New</button>
+        </div>
+    </div>
+</div>

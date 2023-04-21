@@ -1,0 +1,63 @@
+<script src="https://kit.fontawesome.com/c98497f7ae.js" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div class="question-container">
+        <h3 class="text-center">Questions</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Wrong Answer 1</th>
+                    <th>Wrong Answer 2</th>
+                    <th>Wrong Answer 3</th>
+                    <th>Correct Answer</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let question of questions; let i = index">
+                    <td *ngIf="!question.editing">{{ question.frage }}</td>
+                    <td *ngIf="question.editing"><input [(ngModel)]="question.frage" placeholder="Frage" class="new-input"></td>
+                    <td *ngIf="!question.editing">{{ question.falscheAntwort1 }}</td>
+                    <td *ngIf="question.editing"><input [(ngModel)]="question.falscheAntwort1" placeholder="falscheAntwort1" class="new-input"></td>
+                    <td *ngIf="!question.editing">{{ question.falscheAntwort2 }}</td>
+                    <td *ngIf="question.editing"><input [(ngModel)]="question.falscheAntwort2" placeholder="falscheAntwort2" class="new-input"></td>
+                    <td *ngIf="!question.editing">{{ question.falscheAntwort3 }}</td>
+                    <td *ngIf="question.editing"><input [(ngModel)]="question.falscheAntwort3" placeholder="falscheAntwort3" class="new-input"></td>
+                    <td *ngIf="!question.editing">{{ question.richtigeAntwort }}</td>
+                    <td *ngIf="question.editing"><input [(ngModel)]="question.richtigeAntwort" placeholder="richtigeAntwort" class="new-input"></td>
+                    <td *ngIf="!question.editing">{{ question.categoryName }}</td>
+                    <td *ngIf="question.editing">
+                        <select type="text" [(ngModel)]="question.kategorien_id">
+                            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button *ngIf="!newRow.editing" type="button" class="btn btn-success action-btn" (click)="editQuestion(question)"><i class="fas fa-edit"></i></button>
+                        <button *ngIf="question.editing" type="button" class="btn btn-success action-btn" (click)="updateQuestion(question)"><i class="fas fa-save"></i></button>
+                        <button *ngIf="!newRow.editing" type="button" class="btn btn-danger action-btn" (click)="deleteQuestion(question)"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                <tr *ngIf="newRow.editing">
+                    <td><input [(ngModel)]="newRow.question" placeholder="Question" class="new-input"></td>
+                    <td><input [(ngModel)]="newRow.falscheAntwort1" placeholder="Wrong Answer 1" class="new-input"></td>
+                    <td><input [(ngModel)]="newRow.falscheAntwort2" placeholder="Wrong Answer 2" class="new-input"></td>
+                    <td><input [(ngModel)]="newRow.falscheAntwort3" placeholder="Wrong Answer 3" class="new-input"></td>
+                    <td><input [(ngModel)]="newRow.richtigeAntwort" placeholder="Correct Answer" class="new-input"></td>
+                    <td>
+                        <select type="text" [(ngModel)]="newRow.kategorien_id">
+                            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button *ngIf="newRow.editing" type="button" class="btn btn-success action-btn" (click)="submitNewAnswers(newRow)"><i class="fas fa-save"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button class="btn btn-primary add-new" (click)="addNewRow()">Add New</button>
+        </div>
+    </div>
+</div>

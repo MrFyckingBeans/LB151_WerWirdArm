@@ -1,0 +1,6 @@
+<!-- dashboard.component.html -->
+<app-header admNav1="Questions" admNav2="Highscore" admNav3="Category" [logOutBtn]="true" (admNav1Clicked)="activeComponent = 'question'" (admNav2Clicked)="activeComponent = 'highscore'" (admNav3Clicked)="activeComponent = 'category'"></app-header>
+
+<app-category-highscore-page *ngIf="activeComponent === 'highscore'"></app-category-highscore-page>
+<app-question-page *ngIf="activeComponent === 'question'"></app-question-page>
+<app-category *ngIf="activeComponent === 'category'"></app-category>

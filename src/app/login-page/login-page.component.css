@@ -1,0 +1,21 @@
+.titleLogin {
+    text-align: center;
+    margin-top: 3%;
+}
+
+/* Center the outer div */
+.outerFormDiv {
+    margin: 0 auto;
+    width: 60%;
+    border: 1px solid black;
+    background-color: white;
+    padding: 40px;
+    border-radius: 20px;
+    margin-top: 3%;
+  }
+  
+  /* Set the width of the form inside the div to 80% */
+  form {
+    width: 80%;
+    margin: 0 auto;
+  }

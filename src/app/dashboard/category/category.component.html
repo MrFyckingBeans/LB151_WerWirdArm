@@ -1,0 +1,32 @@
+<script src="https://kit.fontawesome.com/c98497f7ae.js" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div class="category-container">
+        <h3 class="text-center">Category</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Categories</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categories; let i = index">
+                    <td *ngIf="!category.editing">{{ category.name }}</td>
+                    <td *ngIf="category.editing"><input [(ngModel)]="category.name" placeholder="Name" class="new-input"></td>
+                    <td>
+                        <button *ngIf="!newRow.editing" type="button" class="btn btn-success action-btn" (click)="editCategory(category)"><i class="fas fa-edit"></i></button>
+                        <button *ngIf="category.editing" type="button" class="btn btn-success action-btn" (click)="updateCategory(category)"><i class="fas fa-save"></i></button>
+                        <button *ngIf="!newRow.editing" type="button" class="btn btn-danger action-btn" (click)="deleteCategory(category)"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                <tr *ngIf="newRow.editing">
+                    <td><input [(ngModel)]="newRow.name" placeholder="Name" class="new-input"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <button class="btn btn-primary add-new" (click)="addNewRow()">Add New</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    height: 100%;
+    gap: 2rem;
+}
+
+.highscore-container {
+    flex: 4;
+    width: 100%; /* Add width */
+    max-width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Add margin */
+    margin-bottom: 2rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.table {
+    width: 100%;
+}
+
+/* Add the new-input class */
+.new-input {
+    width: 100%;
+}
+
+/* Media Query for responsive margin */
+@media (max-width: 991px) {
+    .container {
+        flex-direction: column;
+    }
+    .category-container,
+    .highscore-container {
+        max-width: 100%;
+    }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 12px;
+}
+
+.btn i {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.action-btn-group {
+    display: inline-flex;
+}
+
+.action-btn {
+    margin-right: 4px;
+}

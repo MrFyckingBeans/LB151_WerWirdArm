@@ -1,0 +1,45 @@
+.titleWelcome {
+    text-align: center;
+    margin-top: 3%;
+  }
+  
+  #carouselExampleCaptions {
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+    position: relative;
+  }
+  
+  .carousel-item {
+    width: 100%;
+    height: auto;
+  }
+  
+  .card {
+    border-radius: 15px;
+    margin: 0 10px;
+  }
+  
+  .card-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-title {
+    text-align: center;
+  }
+  
+  .custom-form {
+    max-width: 60%;
+    margin: 0 auto;
+  }
+  
+  .carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: calc(50% - 20px); /* Adjust this value to vertically center the buttons */
+  }
+
+  #sumbitBtn {
+    margin-top: 1%;
+  }
+  

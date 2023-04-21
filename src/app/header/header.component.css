@@ -1,0 +1,16 @@
+header {
+    background-color: #222222;
+    color: #ffffff;
+  }
+  h3{
+    color: #ffffff;
+  }
+  .btn-primary {
+    color: white;
+  }
+  .logo {
+    margin-left: 10%;
+  }
+  .pageTitleRight{
+    margin-right: 10%
+  }

@@ -1,0 +1,23 @@
+    
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+          <h3 class="logo">WWM</h3>
+        </a>
+        
+        <h3 *ngIf = "pageTitle !== undefined">{{pageTitle}}</h3>
+
+        <ul *ngIf="admNav1 !== undefined || admNav2 !== undefined || admNav3 !== undefined" class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li *ngIf="admNav1 !== undefined"><a href="#" class="nav-link px-2 link-secondary" (click)="admNav1Clicked.emit(); $event.preventDefault(); setActiveComponentQuestions()">{{admNav1}}</a></li>
+          <li *ngIf="admNav2 !== undefined"><a href="#" class="nav-link px-2 link-secondary" (click)="admNav2Clicked.emit(); $event.preventDefault(); setActiveComponentHighscore()">{{admNav2}}</a></li>
+          <li *ngIf="admNav3 !== undefined"><a href="#" class="nav-link px-2 link-secondary" (click)="admNav3Clicked.emit(); $event.preventDefault(); setActiveComponentCategory()">{{admNav3}}</a></li>
+        </ul>
+    
+        <div class="col-md-3 text-end">
+            <h3 class="pageTitleRight" *ngIf = "pageTitleRight !== undefined">{{pageTitleRight}}</h3>
+          <button *ngIf = "logInBtn === true" type="button" (click)="goToLoginPage()" class="btn btn-outline-primary btn-primary me-2">Login</button>
+          <button *ngIf = "logOutBtn === true" type="button" (click)="goToHomePage()" class="btn btn-outline-primary btn-primary me-2">LogOut</button>
+        </div>
+      </header>
+
+      
+      
