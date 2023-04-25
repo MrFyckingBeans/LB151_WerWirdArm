@@ -18,7 +18,7 @@ export class WelcomePageComponent implements OnInit{
   
 
   ngOnInit() {
-    const url = 'http://localhost:5002/kategorien';
+    const url = 'https://server151wer-wird-arm.azurewebsites.net/kategorien';
     this.http.get(url).subscribe((response) => {
       this.categories = response;
     });
