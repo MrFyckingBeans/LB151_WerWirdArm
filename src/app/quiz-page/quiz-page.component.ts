@@ -137,7 +137,13 @@ export class QuizPageComponent implements OnInit {
   }
 
   nextRoundPreparation() {
-
+    const storedPlayerData = localStorage.getItem('playerdata'); 
+    if (storedPlayerData) { this.playerData = JSON.parse(storedPlayerData); 
+    } 
+    const answerButtons = document.getElementsByClassName("answer-button") as HTMLCollectionOf<HTMLButtonElement>; 
+    for (let i = 0; i < answerButtons.length; i++) { answerButtons[i].disabled = false; 
+      answerButtons[i].style.backgroundColor = ''; } this.displayRandomQuestion(); 
+      localStorage.setItem('currentQuestionId', this.currentQuestion.id.toString());
   }
 
   Joker() {
@@ -154,12 +160,14 @@ export class QuizPageComponent implements OnInit {
     const randomFalseAnswers = falseAnswers.sort(() => 0.5 - Math.random()).slice(0, 2);
     const buttonIds = randomFalseAnswers.slice(0, 2).map(id => `answer-${id}`);
     for (const id of buttonIds) {
-      console.log()
+      console.log(id)
       const button = Array.from(buttons).find((btn: HTMLElement) => btn.id === id) as HTMLButtonElement;
       if (button) {   
         button.disabled = true; button.classList.add('disabled-button');
       }
     }
+
+
   }
 
   cashOut(){

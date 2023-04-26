@@ -7,19 +7,19 @@
     <div class="container quiz-container" *ngIf="currentQuestion && currentAnswers.length > 0">
         <div class="row">
             <div class="col text-start">
-                <span>Punkte: XX</span>
+                <span>Punkte:</span>
             </div>
             <div class="col d-flex justify-content-center align-items-center question-col">
                 <h3>{{currentQuestion.frage}}</h3>
             </div>
             <div class="col text-end">
-                <span>00:00</span>
+                <span></span>
             </div>
         </div>
         <div class="d-flex justify-content-center align-items-center buttons-container text-center">
             <div>
                 <button type="button" class="btn btn-primary mb-3 d-block" (click)="cashOut()">Cash Out</button>
-                <button type="button" class="btn btn-success d-block" (click)="Joker()">50 / 50 Joker</button>
+                <button *ngIf!="jokerUsed" type="button" class="btn btn-success d-block" (click)="Joker()">50 / 50 Joker</button>
             </div>
         </div>
         <div class="row answer-buttons">
@@ -29,7 +29,7 @@
                 <button class="answer-button btn w-100 h-100" id="answer-{{answer.id}}" (click)="answerQuestion(answer)">{{answer.antwort}}</button>            </div>
         </div>
         <div class="next-button-container">
-            <button class="btn btn-primary">Next</button>
+            <button class="btn btn-primary" (click)="nextRoundPreparation()">Next</button>
         </div>
         
     </div>
