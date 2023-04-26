@@ -134,7 +134,7 @@ export class QuizPageComponent implements OnInit {
   }
 
   nextRoundPreparation(){
-    
+
   }
   
 }

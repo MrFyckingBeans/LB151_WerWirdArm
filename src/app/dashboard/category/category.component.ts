@@ -14,7 +14,7 @@ export class CategoryComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    const url = 'http://localhost:5002/kategorien';
+    const url = 'https://server151wer-wird-arm.azurewebsites.net/kategorien';
     this.http.get<Array<any>>(url).subscribe((response) => {
       this.categories = response;
     });
@@ -29,7 +29,7 @@ export class CategoryComponent implements OnInit {
 
   submitNewCategory(category: any) {
     if (category.name) {
-      const url = `http://localhost:5002/kategorien?name=${category.name}`;
+      const url = `https://server151wer-wird-arm.azurewebsites.net/kategorien?name=${category.name}`;
       this.http.post(url, {}).subscribe(() => {
         this.newRow = {};
         category.editing = false;
@@ -38,7 +38,7 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteCategory(category: any) {
-    const url = `http://localhost:5002/kategorien/${category.id}`;
+    const url = `https://server151wer-wird-arm.azurewebsites.net//kategorien/${category.id}`;
     this.http.delete(url).subscribe(() => {
       this.categories = this.categories.filter(c => c.id !== category.id);
     });
