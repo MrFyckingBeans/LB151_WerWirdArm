@@ -14,7 +14,7 @@ export class CategoryHighscorePageComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-    const url = 'http://localhost:5002/spiele';
+    const url = 'https://server151wer-wird-arm.azurewebsites.net/spiele';
     this.http.get<Array<any>>(url).subscribe((response) => {
       
       this.highscore = response;
@@ -48,7 +48,7 @@ export class CategoryHighscorePageComponent implements OnInit {
 
   submitNewScore(score: any) {
     if (score.spieler && score.punktzahl && score.start && score.ende && score.kategorien_id) {
-      const url = 'http://localhost:5002/spiele';
+      const url = 'https://server151wer-wird-arm.azurewebsites.net/spiele';
       this.http.post(url, this.prepareScoreData(score)).subscribe(() => {
         this.newRow = {};
         score.editing = false;
@@ -57,7 +57,7 @@ export class CategoryHighscorePageComponent implements OnInit {
   }
 
   deleteScore(score: any) {
-    const url = `http://localhost:5002/spiele/${score.id}`;
+    const url = `https://server151wer-wird-arm.azurewebsites.net/${score.id}`;
     this.http.delete(url).subscribe(() => {
       this.highscore = this.highscore.filter(s => s.id !== score.id);
     });
@@ -69,7 +69,7 @@ export class CategoryHighscorePageComponent implements OnInit {
 
   updateScore(score: any) {
     if (score.spieler && score.punktzahl && score.start && score.ende && score.kategorien_id) {
-      const url = `http://localhost:5002/spiele/${score.id}`;
+      const url = `https://server151wer-wird-arm.azurewebsites.net/${score.id}`;
       this.http.put(url, this.prepareScoreData(score)).subscribe(() => {
         score.editing = false;
       });

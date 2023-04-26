@@ -25,9 +25,9 @@ export class QuestionPageComponent implements OnInit {
 
   loadData() {
     console.log("allu");
-    const categoriesUrl = 'http://localhost:5002/kategorien';
-    const questionsUrl = 'http://localhost:5002/fragen';
-    const answersUrl = 'http://localhost:5002/antworten';
+    const categoriesUrl = 'https://server151wer-wird-arm.azurewebsites.net/kategorien';
+    const questionsUrl = 'https://server151wer-wird-arm.azurewebsites.net/fragen';
+    const answersUrl = 'https://server151wer-wird-arm.azurewebsites.net/antworten';
 
     forkJoin([
       this.http.get<Array<any>>(categoriesUrl),
@@ -64,7 +64,7 @@ export class QuestionPageComponent implements OnInit {
   }
 
   submitNewAnswers(answer: any) {
-    const answersUrl = 'http://localhost:5002/antworten';
+    const answersUrl = 'https://server151wer-wird-arm.azurewebsites.net/antworten';
     const answersSubmitted = [
       this.newRow.falscheAntwort1,
       this.newRow.falscheAntwort2,
@@ -102,7 +102,7 @@ export class QuestionPageComponent implements OnInit {
     
     console.log("alla");
     //console.log(question);
-    const questionsUrl = 'http://localhost:5002/fragen';
+    const questionsUrl = 'https://server151wer-wird-arm.azurewebsites.net/fragen';
     const newQuestion = {
       frage: this.newRow.question,
       falscheAntwort1: answerAll[0].id,
@@ -139,11 +139,11 @@ export class QuestionPageComponent implements OnInit {
       originalQuestion.richtigeAntwort,
     ];
   
-    const questionUrl = `http://localhost:5002/fragen/${question.id}`;
+    const questionUrl = `https://server151wer-wird-arm.azurewebsites.net/fragen/${question.id}`;
     this.http.delete(questionUrl).subscribe(
       (response) => {
         const deleteRequests = answerIds.map((answerId) => {
-          const answerUrl = `http://localhost:5002/antworten/${answerId}`;
+          const answerUrl = `https://server151wer-wird-arm.azurewebsites.net/antworten/${answerId}`;
           return this.http.delete(answerUrl);
         });
   
@@ -185,7 +185,7 @@ export class QuestionPageComponent implements OnInit {
     ];
   
     const putAnswerRequests = answerUpdates.map(answerUpdate => {
-      const answerUrl = `http://localhost:5002/antworten/${answerUpdate.id}`;
+      const answerUrl = `https://server151wer-wird-arm.azurewebsites.net/antworten/${answerUpdate.id}`;
       return this.http.put(answerUrl, { antwort: answerUpdate.newAnswer });
     });
   
@@ -197,7 +197,7 @@ export class QuestionPageComponent implements OnInit {
         };
   
         // Use the 'updatefrage' endpoint for updating the question
-        const questionsUrl = `http://localhost:5002/fragen/updatefrage/${question.id}`;
+        const questionsUrl = `https://server151wer-wird-arm.azurewebsites.net/fragen/updatefrage/${question.id}`;
         this.http.put(questionsUrl, updatedQuestion).subscribe(
           response => {
             this.loadData();

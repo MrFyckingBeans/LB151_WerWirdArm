@@ -28,8 +28,8 @@ export class QuizPageComponent implements OnInit {
   }
 
   getQuestions() {
-    const questionsUrl = 'http://localhost:5002/fragen';
-    const answersUrl = 'http://localhost:5002/antworten';
+    const questionsUrl = 'https://server151wer-wird-arm.azurewebsites.net/fragen';
+    const answersUrl = 'https://server151wer-wird-arm.azurewebsites.net/antworten';
     this.http.get<any[]>(questionsUrl).subscribe((questionsResponse: any[]) => {
       console.log('questionsResponse:', questionsResponse);
       this.http.get<any[]>(answersUrl).subscribe((answersResponse: any[]) => {
@@ -112,7 +112,7 @@ export class QuizPageComponent implements OnInit {
   
 
   updateCountsCorrect(questionId: number) {
-    this.http.put(`http://localhost:5002/fragen/updatecounts/${questionId}`, {
+    this.http.put(`https://server151wer-wird-arm.azurewebsites.net/fragen/updatecounts/${questionId}`, {
       countRichtigeAntwort: 1,
       countFalscheAntwort: 0
     }).subscribe(response => {
@@ -123,7 +123,7 @@ export class QuizPageComponent implements OnInit {
   }
 
   updateCountsIncorrect(questionId: number) {
-    this.http.put(`http://localhost:5002/fragen/updatecounts/${questionId}`, {
+    this.http.put(`https://server151wer-wird-arm.azurewebsites.net/fragen/updatecounts/${questionId}`, {
       countRichtigeAntwort: 0,
       countFalscheAntwort: 1
     }).subscribe(response => {

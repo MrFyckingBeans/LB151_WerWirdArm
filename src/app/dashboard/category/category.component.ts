@@ -38,7 +38,7 @@ export class CategoryComponent implements OnInit {
   }
 
   deleteCategory(category: any) {
-    const url = `https://server151wer-wird-arm.azurewebsites.net//kategorien/${category.id}`;
+    const url = `https://server151wer-wird-arm.azurewebsites.net/kategorien/${category.id}`;
     this.http.delete(url).subscribe(() => {
       this.categories = this.categories.filter(c => c.id !== category.id);
     });
@@ -50,7 +50,7 @@ export class CategoryComponent implements OnInit {
 
   updateCategory(category: any) {
     if (category.name) {
-      const url = `http://localhost:5002/kategorien/${category.id}?name=${category.name}`;
+      const url = `https://server151wer-wird-arm.azurewebsites.net/kategorien/${category.id}?name=${category.name}`;
       this.http.put(url, {}).subscribe(() => {
         category.editing = false;
       });
