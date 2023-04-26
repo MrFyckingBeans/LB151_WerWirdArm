@@ -99,6 +99,7 @@ export class QuizPageComponent implements OnInit {
       const correctBtn = this.el.nativeElement.querySelector(`#answer-${selectedAnswer.id}`);
       this.renderer.setStyle(correctBtn, 'background-color', 'green');
       this.updateCountsCorrect(this.currentQuestion.id);
+      this.playerData.punktzahl += 30;
     } else {
       // Update button color to red for incorrect answer
       const incorrectBtn = this.el.nativeElement.querySelector(`#answer-${selectedAnswer.id}`);
@@ -143,12 +144,17 @@ export class QuizPageComponent implements OnInit {
     localStorage.setItem('joker', true.toString());
     this.jokerUsed = true;
     const buttons = Array.from(this.el.nativeElement.querySelectorAll('.answer-button')) as HTMLElement[];
+    console.log(buttons);
+
     const falseAnswers = [this.currentAnswers[1].id,
     this.currentAnswers[2].id,
     this.currentAnswers[3].id]
+    console.log(falseAnswers);
+
     const randomFalseAnswers = falseAnswers.sort(() => 0.5 - Math.random()).slice(0, 2);
     const buttonIds = randomFalseAnswers.slice(0, 2).map(id => `answer-${id}`);
     for (const id of buttonIds) {
+      console.log()
       const button = Array.from(buttons).find((btn: HTMLElement) => btn.id === id) as HTMLButtonElement;
       if (button) {   
         button.disabled = true; button.classList.add('disabled-button');
