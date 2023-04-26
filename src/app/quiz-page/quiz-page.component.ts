@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class QuizPageComponent implements OnInit {
   jokerUsed: boolean  = false;
 
 
-  constructor(private http: HttpClient, private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private http: HttpClient, private renderer: Renderer2, private el: ElementRef, private router: Router) { }
 
   ngOnInit() {
     const storedPlayerData = localStorage.getItem('playerdata');
@@ -149,10 +150,20 @@ export class QuizPageComponent implements OnInit {
     const buttonIds = randomFalseAnswers.slice(0, 2).map(id => `answer-${id}`);
     for (const id of buttonIds) {
       const button = Array.from(buttons).find((btn: HTMLElement) => btn.id === id) as HTMLButtonElement;
-      if (button) {
+      if (button) {   
         button.disabled = true; button.classList.add('disabled-button');
       }
     }
+  }
+
+  cashOut(){
+    const date = new Date(); 
+    const formattedDateTime = date.toISOString(); 
+    const spiel = { ...this.playerData, ende: formattedDateTime }
+
+    this.http.post('https://server151wer-wird-arm.azurewebsites.net/spiele',spiel).subscribe(() => { });
+    this.router.navigate(['/']);
+   
   }
 
 }
