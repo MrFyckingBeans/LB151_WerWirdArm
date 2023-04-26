@@ -12,6 +12,7 @@ export class QuizPageComponent implements OnInit {
   questions: any[] = [];
   currentQuestion: any = null;
   currentAnswers: any[] = [];
+  jokerUsed: boolean  = false;
 
 
   constructor(private http: HttpClient, private renderer: Renderer2, private el: ElementRef) { }
@@ -35,7 +36,7 @@ export class QuizPageComponent implements OnInit {
       this.http.get<any[]>(answersUrl).subscribe((answersResponse: any[]) => {
         const filteredQuestions = questionsResponse.filter(q => q.kategorien_id === parseInt(this.playerData.kategorien_id));
         console.log('filteredQuestions:', filteredQuestions);
-  
+
         this.questions = filteredQuestions.map(question => {
           const questionAnswers = [
             { id: question.richtigeAntwort, isCorrect: true },
@@ -46,36 +47,36 @@ export class QuizPageComponent implements OnInit {
             const answerDetails = answersResponse.find(a => a.id === answer.id);
             return { ...answerDetails, ...answer };
           });
-  
+
           return {
             ...question,
             answers: questionAnswers,
           };
         });
-  
+
         console.log('questions:', this.questions);
-  
+
         this.displayRandomQuestion();
       });
     });
   }
-  
-  
-  
+
+
+
 
   displayRandomQuestion() {
     const randomIndex = Math.floor(Math.random() * this.questions.length);
     this.currentQuestion = this.questions[randomIndex];
     this.currentAnswers = this.currentQuestion.answers;
-  
+
     this.shuffle(this.currentAnswers); // Shuffle the answers before displaying them
-  
+
     console.log('currentQuestion:', this.currentQuestion);
     console.log('currentAnswers:', this.currentAnswers);
   }
-  
-  
-  
+
+
+
 
   shuffle(array: any[]) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -108,8 +109,8 @@ export class QuizPageComponent implements OnInit {
       this.updateCountsIncorrect(this.currentQuestion.id);
     }
   }
-  
-  
+
+
 
   updateCountsCorrect(questionId: number) {
     this.http.put(`https://server151wer-wird-arm.azurewebsites.net/fragen/updatecounts/${questionId}`, {
@@ -133,8 +134,34 @@ export class QuizPageComponent implements OnInit {
     });
   }
 
-  nextRoundPreparation(){
+  nextRoundPreparation() {
 
   }
-  
+
+  Joker() {
+    localStorage.setItem('joker', true.toString());
+    this.jokerUsed = true;
+    const buttons = Array.from(this.el.nativeElement.querySelectorAll('.answer-button')) as HTMLElement[];
+    const falseAnswers = [this.currentQuestion.falscheAntwort1,
+    this.currentQuestion.falscheAntwort2,
+    this.currentQuestion.falscheAntwort3]
+    const randomFalseAnswers = falseAnswers.sort(() => 0.5 - Math.random()).slice(0, 2);
+    const buttonIds = randomFalseAnswers.slice(0, 2).map(id => `answer-${id}`);
+    for (const id of buttonIds) {
+      const button = Array.from(buttons).find((btn: HTMLElement) => btn.id === id) as HTMLButtonElement;
+      if (button) {
+        button.disabled = true; button.classList.add('disabled-button');
+      }
+    }
+  }
+
 }
+
+
+
+
+
+
+
+
+
