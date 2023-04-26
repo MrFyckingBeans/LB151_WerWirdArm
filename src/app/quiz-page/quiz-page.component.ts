@@ -142,9 +142,9 @@ export class QuizPageComponent implements OnInit {
     localStorage.setItem('joker', true.toString());
     this.jokerUsed = true;
     const buttons = Array.from(this.el.nativeElement.querySelectorAll('.answer-button')) as HTMLElement[];
-    const falseAnswers = [this.currentQuestion.falscheAntwort1,
-    this.currentQuestion.falscheAntwort2,
-    this.currentQuestion.falscheAntwort3]
+    const falseAnswers = [this.currentAnswers[1].id,
+    this.currentAnswers[2].id,
+    this.currentAnswers[3].id]
     const randomFalseAnswers = falseAnswers.sort(() => 0.5 - Math.random()).slice(0, 2);
     const buttonIds = randomFalseAnswers.slice(0, 2).map(id => `answer-${id}`);
     for (const id of buttonIds) {
